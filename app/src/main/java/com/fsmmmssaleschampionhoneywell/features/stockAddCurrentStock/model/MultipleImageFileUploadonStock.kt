@@ -293,12 +293,14 @@ class MultipleImageFileUploadonStock: BaseFragment(),
                 upload_tvClick.visibility = View.VISIBLE
                 progress_wheel.stopSpinning()
                 dataPath = file.absolutePath
+                imagePathupload = dataPath
 
             } else if (isDocDegree == 1) {
                 (tv_text2_image2 as TextView).text = file.name
                 upload_tvClick.visibility = View.VISIBLE
                 progress_wheel.stopSpinning()
                 dataPath1 = file.absolutePath
+                imagePathupload2 = dataPath1
 
             }
 

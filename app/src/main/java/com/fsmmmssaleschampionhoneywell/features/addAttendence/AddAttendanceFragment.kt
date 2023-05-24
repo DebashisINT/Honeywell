@@ -67,6 +67,7 @@ import com.fsmmmssaleschampionhoneywell.features.location.LocationWizard
 import com.fsmmmssaleschampionhoneywell.features.location.SingleShotLocationProvider
 import com.fsmmmssaleschampionhoneywell.features.login.UserLoginDataEntity
 import com.fsmmmssaleschampionhoneywell.features.login.model.LoginStateListDataModel
+import com.fsmmmssaleschampionhoneywell.features.login.presentation.LoginActivity
 import com.fsmmmssaleschampionhoneywell.features.member.api.TeamRepoProvider
 import com.fsmmmssaleschampionhoneywell.features.member.model.TeamListDataModel
 import com.fsmmmssaleschampionhoneywell.features.member.model.TeamListResponseModel
@@ -258,7 +259,7 @@ class AddAttendanceFragment : Fragment(), View.OnClickListener, DatePickerDialog
         } catch (e: Exception) {
             e.printStackTrace()
         }*/
-
+        fetchCUrrentLoc()
         locationList()
         //getWorkTypeListApi()
 
@@ -267,6 +268,27 @@ class AddAttendanceFragment : Fragment(), View.OnClickListener, DatePickerDialog
         }, 1500)
 
         return view
+    }
+
+    fun fetchCUrrentLoc(){
+        SingleShotLocationProvider.requestSingleUpdate(mContext,
+            object : SingleShotLocationProvider.LocationCallback {
+                override fun onStatusChanged(status: String) {
+                }
+
+                override fun onProviderEnabled(status: String) {
+                }
+
+                override fun onProviderDisabled(status: String) {
+                }
+
+                override fun onNewLocationAvailable(location: Location) {
+                    Timber.d("AddAttend onNewLocationAvailable")
+                    println("AddAttend_tag onNewLocationAvailable")
+                    Pref.current_latitude = location.latitude.toString()
+                    Pref.current_longitude = location.longitude.toString()
+                }
+            })
     }
 
     override fun onAttach(context: Context) {

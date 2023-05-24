@@ -7336,6 +7336,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LocationListener {
     //Begin 13.0  LoginActivity AppV 4.1.3 Suman    08/05/2023  26047
     fun checkLocationFetch(){
         if(AppDatabase.getDBInstance()!!.userLocationDataDao().all.size == 0){
+            println("loc_check checkLocationFetch")
             fetchActivityList()
         }else{
             gotoHomeActivity()
@@ -7352,6 +7353,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LocationListener {
             fetchLocReq.date_span = ""
             fetchLocReq.from_date = AppUtils.getCurrentDate()
             fetchLocReq.to_date = AppUtils.getCurrentDate()
+            println("loc_check callFetchLocationApi")
             callFetchLocationApi(fetchLocReq)
     }
         else{
@@ -7368,6 +7370,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LocationListener {
                 .subscribe({ result ->
                     val shopList = result as FetchLocationResponse
                     if (shopList.status == NetworkConstant.SUCCESS) {
+                        println("loc_check success")
                         convertToModelAndSave(shopList.location_details, shopList.visit_distance)
                     }else {
                         gotoHomeActivity()
@@ -7452,6 +7455,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener, LocationListener {
                     continue
                 else
                     localData.battery_percentage = location_details[i].battery_percentage
+
+                println("loc_check ${localData.time}  ${localData.meridiem}")
 
                 AppDatabase.getDBInstance()!!.userLocationDataDao().insert(localData)
 
