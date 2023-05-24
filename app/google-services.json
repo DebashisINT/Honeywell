@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1000646492439",
+    "project_id": "mms-sales-champion",
+    "storage_bucket": "mms-sales-champion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000646492439:android:913cad650a554f24b0b752",
+        "android_client_info": {
+          "package_name": "com.fsmmmssaleschampionhoneywell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000646492439-4dskebgrv0ubshmb5lquhp3p0k5m9bgv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa8ma3V58Bak9p9LdGBsrDS4U80lk6zfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000646492439-4dskebgrv0ubshmb5lquhp3p0k5m9bgv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
