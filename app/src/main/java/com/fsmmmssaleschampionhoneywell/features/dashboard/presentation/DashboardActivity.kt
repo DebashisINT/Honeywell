@@ -2037,11 +2037,15 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, BaseNavigation, 
                         }
                     })*/
 
-
-            Glide.with(mContext)
+            try{
+                Glide.with(mContext)
                     .load(Pref.profile_img)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_menu_profile_image).error(R.drawable.ic_menu_profile_image))
                     .into(profilePicture)
+
+            }catch (ex:Exception){
+                ex.printStackTrace()
+            }
 
         } else
             profilePicture.setImageResource(R.drawable.ic_menu_profile_image)
