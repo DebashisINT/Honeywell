@@ -199,7 +199,8 @@ class AddBillingFragment : BaseFragment(), View.OnClickListener {
                 totalAmount += (mContext as DashboardActivity).totalPrice[i]
             }
 
-            val finalTotalAmount = String.format("%.2f", totalAmount.toFloat())
+            //val finalTotalAmount = String.format("%.2f", totalAmount.toFloat())
+            val finalTotalAmount = String.format("%.2f", totalAmount.toDouble())
             tv_total_order_amount.text = finalTotalAmount
 
             tv_total_order_value.text = productList!!.size.toString()
@@ -332,7 +333,8 @@ class AddBillingFragment : BaseFragment(), View.OnClickListener {
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(mContext)
         pictureDialog.setTitle("Select Action")
-        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture Image", "Select file from file manager")
+        //val pictureDialogItems = arrayOf("Select photo from gallery", "Capture Image", "Select file from file manager")
+        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture Image")
         pictureDialog.setItems(pictureDialogItems,
                 DialogInterface.OnClickListener { dialog, which ->
                     when (which) {
@@ -341,9 +343,10 @@ class AddBillingFragment : BaseFragment(), View.OnClickListener {
                             //(mContext as DashboardActivity).openFileManager()
                             launchCamera()
                         }
-                        2 -> {
-                            (mContext as DashboardActivity).openFileManager()
-                        }
+                        /*2 -> {
+                            //(mContext as DashboardActivity).openFileManager()
+                            (mContext as DashboardActivity).openPDFFileManager()
+                        }*/
                     }
                 })
         pictureDialog.show()

@@ -8698,7 +8698,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, BaseNavigation, 
                 }
                 else if (getCurrentFragType() == FragType.AddBillingFragment) {
 
-                    getCameraImage(data)
+                    getCameraImage(data) // from camera
 
                     /*val file = File(filePath)
                     var newFile: File? = null
@@ -8733,7 +8733,10 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, BaseNavigation, 
 
                         try {
                             CropImage.activity(contentURI)
-                                    .setAspectRatio(40, 21)
+                                    //.setAspectRatio(40, 21)
+                                    //.setAspectRatio(AppUtils.getScreenWidth()*2,AppUtils.getScreenHeight()*2)
+                                .setMinCropWindowSize(AppUtils.getScreenWidth()*2, AppUtils.getScreenHeight()*2)
+                                //.setAspectRatio(2, 6)
                                     .start(this)
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -9433,9 +9436,20 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, BaseNavigation, 
                 }
                 else if (getCurrentFragType() == FragType.AddBillingFragment) {
                     Timber.d("DashboardActivity : " + " , " + " Gallery Image FilePath :" + data!!.data)
-                    CropImage.activity(data.data)
+                    /*CropImage.activity(data.data)
                             .setAspectRatio(40, 21)
+                            .start(this)*/
+
+                    try{
+                        CropImage.activity(data.data)
+                            //.setAspectRatio(40, 21)
+                            //.setAspectRatio(AppUtils.getScreenWidth()*2,AppUtils.getScreenHeight()*2)
+                            .setMinCropWindowSize(AppUtils.getScreenWidth()*2, AppUtils.getScreenHeight()*2)
+                            //.setAspectRatio(2, 6)
                             .start(this)
+                    }catch (ex:Exception){
+                        ex.printStackTrace()
+                    }
                 }
                 else if (getCurrentFragType() == FragType.AddDynamicFragment) {
                     Timber.d("DashboardActivity : " + " , " + " Gallery Image FilePath :" + data!!.data)
@@ -9752,6 +9766,7 @@ class DashboardActivity : BaseActivity(), View.OnClickListener, BaseNavigation, 
                             } else {
                                 when {
                                     getCurrentFragType() == FragType.MultipleImageFileUploadonStock -> addPDFPic(file.length())
+                                    getCurrentFragType() == FragType.AddBillingFragment -> addBillingPic(file.length())
                                 }
                             }
                         } else

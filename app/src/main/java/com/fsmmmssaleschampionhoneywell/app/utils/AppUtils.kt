@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -24,8 +25,6 @@ import android.provider.CalendarContract
 import android.provider.MediaStore
 import android.provider.Settings
 import android.provider.Settings.SettingNotFoundException
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import android.telephony.TelephonyManager
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -35,13 +34,14 @@ import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.fsmmmssaleschampionhoneywell.R
 import com.fsmmmssaleschampionhoneywell.app.AppDatabase
 import com.fsmmmssaleschampionhoneywell.app.Pref
 import com.fsmmmssaleschampionhoneywell.features.location.LocationWizard
 import com.fsmmmssaleschampionhoneywell.features.login.model.LoginStateListDataModel
 import com.fsmmmssaleschampionhoneywell.features.login.model.productlistmodel.ProductRateDataModel
-
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.gson.Gson
@@ -2900,6 +2900,14 @@ class AppUtils {
                 return String.format("%06d", number)
             }
             return ""
+        }
+
+        fun getScreenWidth(): Int {
+            return Resources.getSystem().displayMetrics.widthPixels
+        }
+
+        fun getScreenHeight(): Int {
+            return Resources.getSystem().displayMetrics.heightPixels
         }
 
         /*fun getDurationFromOnlineVideoLink(link: String) : String {

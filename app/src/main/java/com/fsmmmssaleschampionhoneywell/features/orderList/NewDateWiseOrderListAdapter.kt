@@ -97,7 +97,8 @@ class NewDateWiseOrderListAdapter(context: Context, userLocationDataEntity: Arra
                     totalAmount += list[i].total_price?.toDouble()!!
                 }
                 //val totalPrice = DecimalFormat("##.##").format(totalAmount)
-                val totalPrice = String.format("%.2f", totalAmount.toFloat())
+                //val totalPrice = String.format("%.2f", totalAmount.toFloat())
+                val totalPrice = String.format("%.2f", totalAmount.toDouble())
                 itemView.tv_total_amount.text = context.getString(R.string.rupee_symbol) + totalPrice
 
                 if (Pref.isOrderMailVisible) {
