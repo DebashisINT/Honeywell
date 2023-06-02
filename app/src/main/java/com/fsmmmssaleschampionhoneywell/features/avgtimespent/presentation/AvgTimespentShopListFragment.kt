@@ -2298,6 +2298,7 @@ class AvgTimespentShopListFragment : BaseFragment(), DatePickerListener, View.On
             addShopData.assigned_to_shop_id = mAddShopDBModelEntity.assigned_to_shop_id
             addShopData.actual_address = mAddShopDBModelEntity.actual_address
 
+
             var uniqKeyObj = AppDatabase.getDBInstance()!!.shopActivityDao().getNewShopActivityKey(mAddShopDBModelEntity.shop_id, false)
             addShopData.shop_revisit_uniqKey = uniqKeyObj?.shop_revisit_uniqKey!!
 
