@@ -1299,9 +1299,12 @@ class LogoutSyncFragment : BaseFragment(), View.OnClickListener {
         addShopData.assigned_to_shop_id = mAddShopDBModelEntity.assigned_to_shop_id
         addShopData.actual_address = mAddShopDBModelEntity.actual_address
 
-
-        var uniqKeyObj=AppDatabase.getDBInstance()!!.shopActivityDao().getNewShopActivityKey(mAddShopDBModelEntity.shop_id,false)
-        addShopData.shop_revisit_uniqKey=uniqKeyObj?.shop_revisit_uniqKey!!
+        try{
+            var uniqKeyObj=AppDatabase.getDBInstance()!!.shopActivityDao().getNewShopActivityKey(mAddShopDBModelEntity.shop_id,false)
+            addShopData.shop_revisit_uniqKey=uniqKeyObj?.shop_revisit_uniqKey!!
+        }catch (ex:Exception){
+            addShopData.shop_revisit_uniqKey= ""
+        }
 
         if (!TextUtils.isEmpty(mAddShopDBModelEntity.agency_name)) {
             addShopData.agency_name = mAddShopDBModelEntity.agency_name
