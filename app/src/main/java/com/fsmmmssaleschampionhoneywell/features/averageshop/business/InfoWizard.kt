@@ -394,7 +394,8 @@ class InfoWizard {
                             amount += list?.get(i)?.amount?.toDouble()!!
                     }
 
-                    val finalAmount = String.format("%.2f", amount.toFloat())
+                    //val finalAmount = String.format("%.2f", amount.toFloat())
+                    val finalAmount = String.format("%.2f", amount.toDouble())
                     finalAmount
                 } else
                     "0.00"
