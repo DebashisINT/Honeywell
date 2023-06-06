@@ -112,7 +112,7 @@ import kotlin.collections.ArrayList
 // 4.0 AddShopFragment AppV 4.0.6 Suman 18-01-2023 extracontact dob added
 // 5.0 AddShopFragment AppV 4.0.7 saheli 20-02-2023  add feedback voice added mantis 0025684
 // 6.0 AddShopFragment AppV 4.1.3 Suman 18-05-2023  mantis 26162
-
+// 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
 
 
 class AddShopFragment : BaseFragment(), View.OnClickListener {
@@ -4305,6 +4305,7 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                             error.printStackTrace()
                             BaseActivity.isApiInitiated = false
                             progress_wheel.stopSpinning()
+                            Timber.d("Error DuplicateShopOfPhoneNumberNotAllow Api> ${error.printStackTrace()}")
                             Toaster.msgShort(mContext, "Something went wrong. Please try again later")
 //                            (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
                         })
@@ -4787,31 +4788,90 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                 } else {
                                     progress_wheel.stopSpinning()
                                     if (!isFromRefresh)
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    {
+                                        Timber.d("Error getShopTypeListApi Api> ${response.message!!}")
+                                        // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                         (mContext as DashboardActivity).showSnackMessage(response.message!!)
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    }
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                     else
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    {
+                                        // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                         getTypeListApi(isFromRefresh)
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    }
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                 }
                             } else if (response.status == NetworkConstant.NO_DATA) {
                                 progress_wheel.stopSpinning()
                                 if (!isFromRefresh)
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                {
+                                    Timber.d("Error getShopTypeListApi Api >> ${response.message!!}")
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                }
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                 else
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                {
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                     getTypeListApi(isFromRefresh)
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                }
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                             } else {
                                 progress_wheel.stopSpinning()
                                 if (!isFromRefresh)
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                {
+                                    Timber.d("Error getShopTypeListApi Api >>> ${response.message!!}")
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                }
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                 else
-                                    (mContext as DashboardActivity).showSnackMessage(getString(R.string.error_msg), 1000)
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                {
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    (mContext as DashboardActivity).showSnackMessage(
+                                        getString(R.string.error_msg),
+                                        1000
+                                    )
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                }
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
                             if (!isFromRefresh)
+                            // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                            {
+                                Timber.d("Error getShopTypeListApi Api ---->>> ${error.printStackTrace()}")
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                            }
+                            // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                             else
-                                (mContext as DashboardActivity).showSnackMessage(getString(R.string.error_msg), 1000)
+                            // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                            {
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                (mContext as DashboardActivity).showSnackMessage(
+                                    getString(R.string.error_msg),
+                                    1000
+                                )
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                            }
+                            // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                         })
         )
     }
@@ -4857,6 +4917,7 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
+                            Timber.d("Error AreaList Api> ${error.printStackTrace()}")
                             (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
                         })
         )
@@ -4915,31 +4976,57 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                 } else {
                                     progress_wheel.stopSpinning()
                                     if (!isFromRefresh)
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    {
+                                        Timber.d("Error getTypeListApi  Api >>> ${response.message!!}")
+                                        // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                         (mContext as DashboardActivity).showSnackMessage(response.message!!)
+                                        // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    }
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                     else
                                         getEntityTypeListApi(isFromRefresh)
                                 }
                             } else if (response.status == NetworkConstant.NO_DATA) {
                                 progress_wheel.stopSpinning()
                                 if (!isFromRefresh)
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                {
+                                    Timber.d("Error getTypeListApi  Api >> ${response.message!!}")
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                }
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+
+                                else {
                                     getEntityTypeListApi(isFromRefresh)
+                                }
                             } else {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh){
+                                    // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                    Timber.d("Error getTypeListApi  Api > ${response.message!!}")
+                                    // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getEntityTypeListApi(isFromRefresh)
+                                }
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
-                            if (!isFromRefresh)
+                            if (!isFromRefresh) {
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                Timber.d("Error getTypeListApi  Api -------- ${error.printStackTrace()}")
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
-                            else
+                            }
+                            else {
                                 getEntityTypeListApi(isFromRefresh)
+                            }
                         })
         )
     }
@@ -4994,32 +5081,53 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                     }
                                 } else {
                                     progress_wheel.stopSpinning()
-                                    if (!isFromRefresh)
+                                    if (!isFromRefresh) {
+                                        Timber.d("Error getEntityTypeListApi  Api >>>-------- ${response.message!!}")
                                         (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                    else
+                                    }
+                                    else {
                                         getPartyStatusListApi(isFromRefresh)
+                                    }
                                 }
                             } else if (response.status == NetworkConstant.NO_DATA) {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getEntityTypeListApi  Api >>-------- ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getPartyStatusListApi(isFromRefresh)
+                                }
                             } else {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getEntityTypeListApi  Api >-------- ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getPartyStatusListApi(isFromRefresh)
+                                }
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
-                            if (!isFromRefresh)
+                            if (!isFromRefresh) {
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                Timber.d("Error getEntityTypeListApi  Api -------- ${error.printStackTrace()}")
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                            }
+                            // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                             else
+                            // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                            {
+                                // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                                 getPartyStatusListApi(isFromRefresh)
+                                // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                            }
+                            // end 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
                         })
         )
     }
@@ -5073,32 +5181,45 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                     }
                                 } else {
                                     progress_wheel.stopSpinning()
-                                    if (!isFromRefresh)
+                                    if (!isFromRefresh) {
+                                        // start 7.0.AddShopFragment AppV 4.1.5 Saheli 06-06-2023  mantis 26297
+                                        Timber.d("Error getPartyStatusListApi  Api >>-------- ${response.message!!}")
                                         (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                    else
+                                    }
+                                    else {
                                         getRetailerListApi(isFromRefresh)
+                                    }
                                 }
                             } else if (response.status == NetworkConstant.NO_DATA) {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getPartyStatusListApi  Api >>>-------- ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getRetailerListApi(isFromRefresh)
+                                }
                             } else {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getPartyStatusListApi  Api >>>>-------- ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getRetailerListApi(isFromRefresh)
+                                }
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
-                            if (!isFromRefresh)
+                            if (!isFromRefresh) {
+                                Timber.d("Error getPartyStatusListApi  Api -------- ${ error.printStackTrace()}")
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
-                            else
+                            }
+                            else {
                                 getRetailerListApi(isFromRefresh)
+                            }
                         })
         )
     }
@@ -5172,32 +5293,44 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                     }
                                 } else {
                                     progress_wheel.stopSpinning()
-                                    if (!isFromRefresh)
+                                    if (!isFromRefresh){
+                                        Timber.d("Error getRetailerListApi Api> ${response.message!!}")
                                         (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                    else
+                                    }
+                                    else {
                                         getDealerListApi(isFromRefresh)
+                                    }
                                 }
                             } else if (response.status == NetworkConstant.NO_DATA) {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getRetailerListApi Api>> ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getDealerListApi(isFromRefresh)
+                                }
                             } else {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getRetailerListApi Api>>> ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getDealerListApi(isFromRefresh)
+                                }
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
-                            if (!isFromRefresh)
+                            if (!isFromRefresh) {
+                                Timber.d("Error getRetailerListApi Api>>------------- ${ error.printStackTrace()}")
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
-                            else
+                            }
+                            else {
                                 getDealerListApi(isFromRefresh)
+                            }
                         })
         )
     }
@@ -5260,32 +5393,44 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                     }
                                 } else {
                                     progress_wheel.stopSpinning()
-                                    if (!isFromRefresh)
+                                    if (!isFromRefresh) {
+                                        Timber.d("Error getDealerListApi Api>>>>${response.message!!}")
                                         (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                    else
+                                    }
+                                    else {
                                         getBeatListApi(isFromRefresh)
+                                    }
                                 }
                             } else if (response.status == NetworkConstant.NO_DATA) {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getDealerListApi Api>>> ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getBeatListApi(isFromRefresh)
+                                }
                             } else {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getDealerListApi Api>>${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     getBeatListApi(isFromRefresh)
+                                }
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
-                            if (!isFromRefresh)
+                            if (!isFromRefresh) {
+                                Timber.d("Error getDealerListApi Api>>------------- ${ error.printStackTrace()}")
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
-                            else
+                            }
+                            else {
                                 getBeatListApi(isFromRefresh)
+                            }
                         })
         )
     }
@@ -5341,29 +5486,42 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                     }
                                 } else {
                                     progress_wheel.stopSpinning()
-                                    if (!isFromRefresh)
+                                    if (!isFromRefresh) {
+                                        Timber.d("Error getBeatListApi Api>> ${response.message!!}")
                                         (mContext as DashboardActivity).showSnackMessage(response.message!!)
+                                    }
                                 }
                             } else if (response.status == NetworkConstant.NO_DATA) {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getBeatListApi Api>>> ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
+                                }
                             } else {
                                 progress_wheel.stopSpinning()
-                                if (!isFromRefresh)
+                                if (!isFromRefresh) {
+                                    Timber.d("Error getBeatListApi Api>>> ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else{
                                     (mContext as DashboardActivity).showSnackMessage(getString(R.string.error_msg), 1000)
+                            }
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
-                            if (!isFromRefresh)
+                            if (!isFromRefresh) {
+                                Timber.d("Error getBeatListApi Api>>--------------- ${error.printStackTrace()}")
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
-                            else
-                                (mContext as DashboardActivity).showSnackMessage(getString(R.string.error_msg), 1000)
-                        })
+                            }
+                            else {
+                                (mContext as DashboardActivity).showSnackMessage(
+                                    getString(R.string.error_msg),
+                                    1000
+                                )
+                            }
+                            })
         )
     }
 
@@ -5556,19 +5714,25 @@ class AddShopFragment : BaseFragment(), View.OnClickListener {
                                 }
                             } else {
                                 progress_wheel.stopSpinning()
-                                if (!shopAdded)
+                                if (!shopAdded) {
+                                    Timber.d("Error getAssignedToShopApi Api> ${response.message!!}")
                                     (mContext as DashboardActivity).showSnackMessage(response.message!!)
-                                else
+                                }
+                                else {
                                     showShopVerificationDialog(shop_id!!)
+                                }
                             }
 
                         }, { error ->
                             progress_wheel.stopSpinning()
                             error.printStackTrace()
-                            if (!shopAdded)
+                            if (!shopAdded) {
+                                Timber.d("Error getAssignedToShopApi Api> ${error.printStackTrace()}")
                                 (mContext as DashboardActivity).showSnackMessage(getString(R.string.something_went_wrong))
-                            else
+                            }
+                            else {
                                 showShopVerificationDialog(shop_id!!)
+                            }
                         })
         )
     }

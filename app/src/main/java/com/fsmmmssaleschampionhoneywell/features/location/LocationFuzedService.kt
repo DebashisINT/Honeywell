@@ -253,9 +253,14 @@ class LocationFuzedService : Service(), GoogleApiClient.ConnectionCallbacks, Goo
 //        }
 
 
-        var mgr = getSystemService(Context.POWER_SERVICE) as PowerManager;
-        mWakeLock = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyWakeLock") as PowerManager.WakeLock;
-        mWakeLock.acquire()
+        try{
+            var mgr = getSystemService(Context.POWER_SERVICE) as PowerManager;
+            mWakeLock = mgr.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyWakeLock") as PowerManager.WakeLock;
+            mWakeLock.acquire()
+        }catch (ex:Exception){
+            ex.printStackTrace()
+        }
+
 
         System.gc()
 

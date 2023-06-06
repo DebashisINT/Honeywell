@@ -1330,16 +1330,20 @@ class AppUtils {
          * Purpose: internet checking
          */
         fun isOnline(mContext: Context): Boolean {
-            val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            try{
+                val cm = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-            var info: NetworkInfo? = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-            // test for connection for WIFI
-            if (info != null && info.isAvailable && info.isConnected) {
-                return true
+                var info: NetworkInfo? = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+                // test for connection for WIFI
+                if (info != null && info.isAvailable && info.isConnected) {
+                    return true
+                }
+                info = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+                // test for connection for Mobile
+                return info != null && info.isAvailable && info.isConnected
+            }catch (ex:Exception){
+                return false
             }
-            info = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-            // test for connection for Mobile
-            return info != null && info.isAvailable && info.isConnected
         }
 
         fun endShopDuration(shopId: String,mContext: Context) {
