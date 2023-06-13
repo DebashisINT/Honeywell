@@ -104,6 +104,7 @@ import kotlin.collections.ArrayList
 // 5.0 NearByShopsListFragment AppV 4.0.6 Suman 03-02-2023 updateModifiedShop + sendModifiedShopList  for shop update mantis 25624
 // 6.0 NearByShopsListFragment AppV 4.0.7 saheli 20-02-2023 voice search mantis 0025683
 // 7.0 NearByShopsListFragment AppV 4.0.7 saheli 21-02-2023 voice search mantis 0025683
+// 8.0 NearByShopsListFragment AppV 4.0.7 saheli 08-06-2023 0026307 mantis  Play store console report issues
 class NearByShopsListFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var mNearByShopsListAdapter: NearByShopsListAdapter
@@ -3433,8 +3434,16 @@ class NearByShopsListFragment : BaseFragment(), View.OnClickListener {
 
     private fun getAssignedPPListApi(shop_id: String?, isFromInitView: Boolean) {
 
-        if (!isFromInitView)
-            (mContext as DashboardActivity).showSnackMessage(getString(R.string.wait_msg), 1000)
+        // start 8.0 NearByShopsListFragment AppV 4.0.7 saheli 08-06-2023 0026307 mantis  Play store console report issues
+        try{
+            if (!isFromInitView)
+                (mContext as DashboardActivity).showSnackMessage(getString(R.string.wait_msg), 1000)
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+        }
+        // end 8.0 NearByShopsListFragment AppV 4.0.7 saheli 08-06-2023 0026307 mantis  Play store console report issues
+
 
         val repository = AssignToPPListRepoProvider.provideAssignPPListRepository()
         progress_wheel.spin()
@@ -3840,6 +3849,7 @@ class NearByShopsListFragment : BaseFragment(), View.OnClickListener {
         }catch (ex:Exception){
             addShopData.shop_revisit_uniqKey=""
         }
+
 
         addShopData.project_name = mAddShopDBModelEntity.project_name
         addShopData.landline_number = mAddShopDBModelEntity.landline_number

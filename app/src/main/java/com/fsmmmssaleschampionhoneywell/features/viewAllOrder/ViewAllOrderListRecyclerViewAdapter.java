@@ -141,6 +141,7 @@ public class ViewAllOrderListRecyclerViewAdapter extends RecyclerView.Adapter<Vi
                     attendanceFragmentViewHolder.ordered_amount_tv.setText(mViewAllOrderListEntityArray.get(position).getAmount());
                 else {
                     //String finalAmount = String.format("%.2f", Float.parseFloat(mViewAllOrderListEntityArray.get(position).getAmount()));
+                    //mantis id 26274
                     String finalAmount = String.format("%.2f", Double.parseDouble(mViewAllOrderListEntityArray.get(position).getAmount()));
                     attendanceFragmentViewHolder.ordered_amount_tv.setText(context.getString(R.string.rupee_symbol) +
                             " " + finalAmount);

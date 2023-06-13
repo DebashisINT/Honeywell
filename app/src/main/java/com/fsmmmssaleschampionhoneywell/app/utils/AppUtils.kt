@@ -49,6 +49,8 @@ import com.google.gson.reflect.TypeToken
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
+import okhttp3.CacheControl
+import okhttp3.Interceptor
 import org.apache.commons.lang3.StringEscapeUtils
 import timber.log.Timber
 import java.io.*
@@ -69,6 +71,8 @@ import java.util.regex.Pattern
 /**
  * Created by Pratishruti on 08-11-2017.
  */
+// Revision History
+// 1.0  LoginActivity 0026316	mantis saheli v 4.1.6 09-06-2023
 class AppUtils {
     companion object {
         var contx:Context?= null
@@ -1127,6 +1131,9 @@ class AppUtils {
 
         }
 
+
+
+
         fun convertToBillingFormat(date: String): String {
             try {
                 val f = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
@@ -1346,6 +1353,70 @@ class AppUtils {
             }
         }
 
+        /**
+         * Purpose: internet checking cache clear
+         */
+        // 1.0  LoginActivity start 0026316	mantis saheli v 4.1.6 09-06-2023
+        fun isOnlinecacheClear(mContext: Context): Boolean {
+            try {
+                var cacheInterceptor: Interceptor = object : Interceptor {
+                    @Throws(IOException::class)
+                    override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+                        val cacheBuilder = CacheControl.Builder()
+                        cacheBuilder.maxAge(0, TimeUnit.SECONDS)
+                        cacheBuilder.maxStale(365, TimeUnit.DAYS)
+                        val cacheControl:CacheControl = cacheBuilder.build()
+                        var request: okhttp3.Request = chain.request()
+                        if (isOnline(mContext)) {
+                            request = request.newBuilder()
+                                .cacheControl(cacheControl)
+                                .build()
+                        }
+                        val originalResponse: okhttp3.Response = chain.proceed(request)
+                        return if (isOnline(mContext)) {
+                            val maxAge = 60 // read from cache
+                            originalResponse.newBuilder()
+                                .header("Cache-Control", "public, max-age=$maxAge")
+                                .build()
+                        } else {
+                            val maxStale = 60 * 60 * 24 * 28 // tolerate 4-weeks stale
+                            originalResponse.newBuilder()
+                                .header("Cache-Control", "public, only-if-cached, max-stale=$maxStale")
+                                .build()
+                        }
+                    }
+                }
+            }catch (ex:Exception){
+                return false
+            }
+            return true
+        }
+
+        fun deleteCache(context: Context) {
+            try {
+                val dir = context.cacheDir
+                deleteDir(dir)
+            } catch (e: java.lang.Exception) {
+            }
+        }
+        fun deleteDir(dir: File?): Boolean {
+            return if (dir != null && dir.isDirectory) {
+                val children = dir.list()
+                for (i in children.indices) {
+                    val success = deleteDir(File(dir, children[i]))
+                    if (!success) {
+                        return false
+                    }
+                }
+                dir.delete()
+            } else if (dir != null && dir.isFile) {
+                dir.delete()
+            } else {
+                false
+            }
+        }
+        // 1.0  LoginActivity end 0026316	mantis saheli v 4.1.6 09-06-2023
+
         fun endShopDuration(shopId: String,mContext: Context) {
             val shopActiList = AppDatabase.getDBInstance()!!.shopActivityDao().getShopForDay(shopId, AppUtils.getCurrentDateForShopActi())
             if (shopActiList.isEmpty())
@@ -1403,9 +1474,7 @@ class AppUtils {
 
         @SuppressLint("MissingPermission")
         fun mobNetType(context: Context): String {
-
-            try {
-
+            try{
                 val netType = getNetworkType(context)
                 if (TextUtils.isEmpty(netType) || netType.equals("WiFi", ignoreCase = true))
                     return ""
@@ -1433,14 +1502,13 @@ class AppUtils {
                     -> return "3G"
                     TelephonyManager.NETWORK_TYPE_LTE
                     -> return "4G"
-                    /*TelephonyManager.NETWORK_TYPE_NR
-                    -> return "5G"*/
+                    TelephonyManager.NETWORK_TYPE_NR
+                    -> return "5G"
                     else -> return "Unknown"
                 }
             }catch (ex:Exception){
                 return "Unknown"
             }
-
         }
 
         fun getBatteryPercentage(context: Context): Int {
@@ -2808,7 +2876,7 @@ class AppUtils {
                 val firstName = Pref.user_name?.substring(0, Pref.user_name?.indexOf(" ")!!)
                 return "Hi $firstName"
             }catch (ex:Exception){
-                return "Hi $Pref.user_name"
+                return "Hi ${Pref.user_name}"
             }
 
         }
@@ -2919,6 +2987,69 @@ class AppUtils {
 
         fun getScreenHeight(): Int {
             return Resources.getSystem().displayMetrics.heightPixels
+        }
+
+        fun getPrevMonthCurrentYear_MMM_YYYY(): String {
+            val aCalendar = Calendar.getInstance(Locale.ENGLISH)
+            aCalendar.add(Calendar.MONTH, -1)
+            aCalendar.set(Calendar.DATE, 1)
+            val df = SimpleDateFormat("MMMM-yyyy", Locale.ENGLISH)
+            val formattedDate = df.format(aCalendar.time)
+            return formattedDate.toString()
+        }
+
+
+        fun getDayName(date:String):String{
+            val f = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val d = f.parse(date)
+            val day = SimpleDateFormat("EEEE", Locale.ENGLISH).format(d)
+            return day
+        }
+
+        fun getPrevMonth2CurrentYear_MMM_YYYY(): String {
+            val aCalendar = Calendar.getInstance(Locale.ENGLISH)
+            aCalendar.add(Calendar.MONTH, -2)
+            aCalendar.set(Calendar.DATE, 1)
+            val df = SimpleDateFormat("MMMM-yyyy", Locale.ENGLISH)
+            val formattedDate = df.format(aCalendar.time)
+            return formattedDate.toString()
+        }
+
+        fun getPrevMonth3CurrentYear_MMM_YYYY(): String {
+            val aCalendar = Calendar.getInstance(Locale.ENGLISH)
+            aCalendar.add(Calendar.MONTH, -3)
+            aCalendar.set(Calendar.DATE, 1)
+            val df = SimpleDateFormat("MMMM-yyyy", Locale.ENGLISH)
+            val formattedDate = df.format(aCalendar.time)
+            return formattedDate.toString()
+        }
+
+        fun addORsubMinInTime(minUnit : Int,timeIn24:String):String{ // input like 14:20
+            val myTime = timeIn24
+            val dff = SimpleDateFormat("HH:mm")
+            val dd: Date = dff.parse(myTime)
+            val cal = Calendar.getInstance()
+            cal.setTime(dd)
+            cal.add(Calendar.MINUTE, minUnit)
+            val newTime = String.format(cal.time.toString())
+            return newTime.split(" ").get(3)
+        }
+
+        fun avgTime(timeString:String):String{
+            return try{
+                val timeInHHmmss = timeString
+                val split = timeInHHmmss.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                var sum = 0L
+
+                val sdf = SimpleDateFormat("HH:mm:ss")
+                for (i in split.indices) {
+                    sum += sdf.parse(split[i]).time
+                }
+                val avgDate = Date(sum / split.size)
+                sdf.format(avgDate)
+            }catch (ex:Exception){
+                ""
+            }
         }
 
         /*fun getDurationFromOnlineVideoLink(link: String) : String {

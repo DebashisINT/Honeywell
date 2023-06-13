@@ -200,6 +200,7 @@ class AddBillingFragment : BaseFragment(), View.OnClickListener {
             }
 
             //val finalTotalAmount = String.format("%.2f", totalAmount.toFloat())
+            //mantis id 26274
             val finalTotalAmount = String.format("%.2f", totalAmount.toDouble())
             tv_total_order_amount.text = finalTotalAmount
 
@@ -344,8 +345,7 @@ class AddBillingFragment : BaseFragment(), View.OnClickListener {
                             launchCamera()
                         }
                         /*2 -> {
-                            //(mContext as DashboardActivity).openFileManager()
-                            (mContext as DashboardActivity).openPDFFileManager()
+                            (mContext as DashboardActivity).openFileManager()
                         }*/
                     }
                 })

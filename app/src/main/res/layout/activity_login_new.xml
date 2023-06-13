@@ -65,8 +65,8 @@
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"
                     android:textColor="#287fb2"
-                    android:visibility="gone"
                     android:text="@string/name_filed_managenent_system"
+                    android:visibility="gone"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_10sdp"/>
 

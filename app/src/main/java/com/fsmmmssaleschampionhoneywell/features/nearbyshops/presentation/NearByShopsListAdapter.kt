@@ -415,6 +415,7 @@ class NearByShopsListAdapter(context: Context, list: List<AddShopDBModelEntity>,
                     }
 
                     //val finalAmount = String.format("%.2f", amount.toFloat())
+                    //mantis id 26274
                     val finalAmount = String.format("%.2f", amount.toDouble())
 
                     val builder = SpannableStringBuilder()
@@ -433,6 +434,8 @@ class NearByShopsListAdapter(context: Context, list: List<AddShopDBModelEntity>,
 
                     var avgOrder = "0.00"
                     if (amount.toInt() != 0){
+                        //avgOrder = String.format("%.2f", (amount.toFloat() / orderList.size))
+                        //mantis id 26274
                         avgOrder = String.format("%.2f", (amount.toDouble() / orderList.size).toDouble())
                     }
                     val str4 = SpannableString("₹ $avgOrder")
@@ -447,6 +450,7 @@ class NearByShopsListAdapter(context: Context, list: List<AddShopDBModelEntity>,
                     var maxOrder = "0.00"
                     if (amountList.isNotEmpty()){
                         //maxOrder = String.format("%.2f", amountList.maxOrNull()?.toFloat())
+                        //mantis id 26274
                         maxOrder = String.format("%.2f", amountList.maxOrNull()?.toDouble())
                     }
                     val str6 = SpannableString("₹ $maxOrder")
@@ -461,6 +465,7 @@ class NearByShopsListAdapter(context: Context, list: List<AddShopDBModelEntity>,
                     var minOrder = "0.00"
                     if (amountList.isNotEmpty()){
                         //minOrder = String.format("%.2f", amountList.minOrNull()?.toFloat())
+                        //mantis id 26274
                         minOrder = String.format("%.2f", amountList.minOrNull()?.toDouble())
                     }
                     val str8 = SpannableString("₹ $minOrder")

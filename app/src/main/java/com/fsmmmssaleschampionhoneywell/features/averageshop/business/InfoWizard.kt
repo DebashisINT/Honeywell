@@ -395,6 +395,7 @@ class InfoWizard {
                     }
 
                     //val finalAmount = String.format("%.2f", amount.toFloat())
+                    //mantis id 26274
                     val finalAmount = String.format("%.2f", amount.toDouble())
                     finalAmount
                 } else

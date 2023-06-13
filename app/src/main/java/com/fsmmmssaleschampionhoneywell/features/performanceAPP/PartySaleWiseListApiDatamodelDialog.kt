@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fsmmmssaleschampionhoneywell.R
 import com.fsmmmssaleschampionhoneywell.features.nearbyshops.model.ShopData
-import com.fsmmmssaleschampionhoneywell.features.photoReg.adapter.AdapterUserTestList
+import com.fsmmmssaleschampionhoneywell.features.performanceAPP.model.AdapterUserTestList
 import com.fsmmmssaleschampionhoneywell.widgets.AppCustomEditText
 import com.fsmmmssaleschampionhoneywell.widgets.AppCustomTextView
 

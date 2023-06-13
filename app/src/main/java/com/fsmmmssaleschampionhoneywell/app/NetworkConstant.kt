@@ -1,7 +1,13 @@
 package com.fsmmmssaleschampionhoneywell.app
 
+import com.fsmmmssaleschampionhoneywell.app.utils.AppUtils
+import okhttp3.CacheControl
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
@@ -12,7 +18,7 @@ class NetworkConstant {
     //Base URL
     companion object {
 
-       var BASE_URL = "http://fts.indusnettechnologies.com:7075/API/"
+        var BASE_URL = "http://fts.indusnettechnologies.com:7075/API/"
         var ADD_SHOP_BASE_URL = "http://fts.indusnettechnologies.com:7075/"
 
 
@@ -23,8 +29,8 @@ class NetworkConstant {
         //var BASE_URL = "http://localhost:8081/API/"
         //var ADD_SHOP_BASE_URL = "http://localhost:8081/"
 
-        //var BASE_URL = "http://192.168.4.112:8081/API/"
-        //var ADD_SHOP_BASE_URL = "http://192.168.4.112:8081/"
+        //var BASE_URL = "http://192.168.4.174:8081/API/"
+        //var ADD_SHOP_BASE_URL = "http://192.168.4.174:8081/"
 
 
 
@@ -123,6 +129,8 @@ class NetworkConstant {
                     .build()
         }
     }
+
+
 
 
 }
